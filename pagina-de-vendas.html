@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bolos no Pote — Curso Online por Gertrudes Umbar</title>
+<meta name="description" content="Aprende a fazer e vender bolos no pote profissionais com a confeiteira Gertrudes Umbar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --coral:#E8857A;--coral-dk:#D4706A;--coral-lt:#F4AEA6;--coral-glow:rgba(232,133,122,.28);
+  --gold:#D4A76A;--gold-lt:#E8C99B;--gold-pale:rgba(212,167,106,.12);
+  --choc:#5C3D2E;--choc-dk:#3A2218;--choc-rich:#2A1810;
+  --cream:#FFF5EE;--cream-w:#FFF0E5;--cream-d:#F5E6D8;
+  --dk:#2D2D2D;--muted:#7A6B63;--muted-lt:#A89B93;--white:#FFF;
+  --green:#5CA86B;--green-bg:#EBF5ED;--red-bg:#FEF0EE;
+  --f-head:'Playfair Display',Georgia,serif;
+  --f-body:'Outfit',system-ui,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:var(--f-body);color:var(--dk);background:var(--cream);line-height:1.65;font-size:16px;overflow-x:hidden}
+a{text-decoration:none;color:inherit}button{font-family:inherit;border:none;background:none;cursor:pointer}ul{list-style:none}img{max-width:100%;display:block}
+
+/* grain */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:10000;opacity:.4;
+background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.015'/%3E%3C/svg%3E")}
+
+/* layout */
+.w{max-width:680px;margin:0 auto;padding:0 24px}
+@media(min-width:768px){.w{max-width:800px;padding:0 48px}}
+section{position:relative;overflow:hidden;padding:72px 0}
+@media(min-width:768px){section{padding:96px 0}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(36px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.rv.vis{opacity:1;transform:none}
+.rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}.rv-d4{transition-delay:.4s}
+
+/* typography */
+h1,h2,h3{font-family:var(--f-head);color:var(--choc);line-height:1.15;font-weight:700}
+h1{font-size:clamp(30px,7vw,50px);letter-spacing:-.02em}
+h2{font-size:clamp(24px,5vw,38px);margin-bottom:20px}
+h3{font-size:clamp(18px,3.5vw,24px)}
+p{margin-bottom:14px;color:var(--muted)}
+strong{color:var(--dk)}
+em{font-style:italic;color:var(--coral)}
+
+/* label */
+.lbl{font:700 11px/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--coral);margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.lbl::before{content:'';width:28px;height:1.5px;background:linear-gradient(90deg,var(--coral),transparent)}
+
+/* btn */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--coral);color:var(--white);
+  font:600 15px/1 var(--f-body);letter-spacing:.04em;
+  padding:18px 38px;border-radius:56px;cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:all .35s var(--ease);
+  box-shadow:0 8px 32px var(--coral-glow);
+}
+.btn::before{content:'';position:absolute;top:-50%;left:-60%;width:35%;height:200%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);transform:skewX(-20deg);animation:shim 3.8s ease-in-out infinite}
+@keyframes shim{0%{left:-60%}100%{left:150%}}
+.btn:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(232,133,122,.45);background:var(--coral-dk)}
+.btn--lg{font-size:16px;padding:21px 46px;width:100%;max-width:400px}
+.btn--wh{background:var(--white);color:var(--coral);box-shadow:0 8px 28px rgba(0,0,0,.1)}
+.btn--wh:hover{box-shadow:0 14px 40px rgba(0,0,0,.14)}
+.btn--pulse{animation:gpulse 3s ease-in-out infinite}
+@keyframes gpulse{0%,100%{box-shadow:0 8px 32px var(--coral-glow)}50%{box-shadow:0 8px 52px rgba(232,133,122,.5)}}
+
+/* ═══════════════════════════════
+   HERO — Headline-first, no photo
+   ═══════════════════════════════ */
+.hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:80px 0 60px;
+  background:linear-gradient(178deg,var(--cream-w) 0%,var(--cream) 50%,var(--white) 100%);text-align:center}
+.hero::before{content:'';position:absolute;top:-80px;right:-50px;width:280px;height:280px;background:radial-gradient(circle,rgba(232,133,122,.08),transparent 70%);border-radius:50%}
+.hero::after{content:'';position:absolute;bottom:0;left:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(212,167,106,.08),transparent 70%);border-radius:50%}
+.hero .w{position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:var(--white);font:700 11px/1 var(--f-body);letter-spacing:.15em;text-transform:uppercase;padding:8px 20px;border-radius:40px;margin-bottom:32px;box-shadow:0 4px 16px rgba(212,167,106,.3)}
+.hero h1{max-width:560px;margin:0 auto 16px}
+.hero-sub{font-size:17px;color:var(--muted);max-width:440px;margin:0 auto 36px;line-height:1.6}
+.hero-proof{display:flex;justify-content:center;gap:8px 24px;flex-wrap:wrap;margin-top:24px}
+.hero-proof span{font-size:13px;color:var(--muted-lt);font-weight:500;display:flex;align-items:center;gap:7px}
+.hero-proof span::before{content:'';width:5px;height:5px;background:var(--gold);border-radius:50%}
+.hero-price{font-family:var(--f-head);font-size:14px;color:var(--choc);margin-top:12px;font-weight:600}
+.hero-price .old{text-decoration:line-through;color:var(--muted-lt);margin-right:6px;font-weight:400}
+.scroll-hint{margin-top:48px;font-size:11px;color:var(--muted-lt);letter-spacing:.1em;text-transform:uppercase;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(8px);opacity:.9}}
+
+/* ═══════════════════════════════
+   PAIN
+   ═══════════════════════════════ */
+.pain{background:var(--white);padding:80px 0}
+.pain h2{text-align:center;max-width:460px;margin:0 auto 36px}
+.pain-list{max-width:560px;margin:0 auto}
+.pain-item{padding:16px 20px;margin-bottom:10px;border-radius:14px;background:var(--cream);border-left:3px solid transparent;display:flex;align-items:flex-start;gap:14px;font-size:15px;line-height:1.55;transition:all .35s var(--ease)}
+.pain-item:hover{border-left-color:var(--coral);transform:translateX(6px);background:var(--cream-w)}
+.pain-item .ic{font-size:18px;flex-shrink:0}
+.pain-end{font-family:var(--f-head);font-size:19px;font-weight:600;font-style:italic;color:var(--coral);text-align:center;margin-top:36px}
+
+/* ═══════════════════════════════
+   AUTHORITY — photo as hero bg
+   ═══════════════════════════════ */
+.auth{position:relative;padding:0;overflow:hidden;background:var(--cream)}
+.auth-img-wrap{position:relative;width:100%;height:420px;overflow:hidden}
+@media(min-width:640px){.auth-img-wrap{height:500px}}
+@media(min-width:900px){.auth-img-wrap{height:560px}}
+.auth-bg{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+@media(min-width:640px){.auth-bg{object-position:center 25%}}
+/* Soft vignette fade on ALL edges — no hard borders */
+.auth-img-wrap::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg, var(--cream) 0%, transparent 12%, transparent 55%, var(--cream) 100%),
+    linear-gradient(90deg, var(--cream) 0%, transparent 10%, transparent 90%, var(--cream) 100%)}
+.auth-content{position:relative;z-index:2;background:var(--cream);padding:40px 24px 72px;margin-top:-80px}
+@media(min-width:640px){.auth-content{padding:48px 48px 80px;margin-top:-100px}}
+.auth-text{max-width:640px;margin:0 auto}
+.auth-text p{font-size:15px;line-height:1.75;color:var(--muted)}
+.auth-quote{position:relative;padding:20px 24px 20px 32px;margin:20px 0;background:var(--white);border-radius:0 16px 16px 0;border-left:4px solid var(--coral);font-family:var(--f-head);font-size:19px;font-style:italic;color:var(--choc);line-height:1.45;box-shadow:0 4px 20px rgba(92,61,46,.04)}
+.auth-quote::before{content:'\201C';position:absolute;top:-6px;left:12px;font-family:var(--f-head);font-size:56px;color:var(--coral-lt);line-height:1;opacity:.5}
+.auth-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.auth-stat{display:flex;align-items:center;gap:7px;padding:8px 16px;background:var(--white);border-radius:40px;font-size:13px;font-weight:600;color:var(--choc);border:1px solid rgba(212,167,106,.12);box-shadow:0 2px 8px rgba(92,61,46,.03)}
+
+/* ═══════════════════════════════
+   TRANSFORMATION
+   ═══════════════════════════════ */
+.tf{background:var(--white);padding:80px 0;text-align:center}
+.tf-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:560px;margin:36px auto 0}
+@media(max-width:480px){.tf-grid{grid-template-columns:1fr}}
+.tf-col{padding:26px 22px;border-radius:18px;text-align:left}
+.tf-col h3{font-family:var(--f-body);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.tf-col li{padding:7px 0;font-size:14px;display:flex;align-items:center;gap:10px;color:var(--muted)}
+.tf-b{background:#F0EBE7;border:1px solid rgba(92,61,46,.05)}
+.tf-b h3{color:var(--muted-lt)}
+.tf-b li::before{content:'✕';font-size:10px;font-weight:700;color:var(--coral);width:20px;height:20px;display:grid;place-items:center;background:var(--red-bg);border-radius:50%;flex-shrink:0}
+.tf-a{background:linear-gradient(150deg,rgba(232,133,122,.05),rgba(212,167,106,.07));border:1px solid rgba(212,167,106,.1);box-shadow:0 6px 24px rgba(212,167,106,.06)}
+.tf-a h3{color:var(--coral)}
+.tf-a li{color:var(--dk)}
+.tf-a li::before{content:'✓';font-size:10px;font-weight:700;color:var(--green);width:20px;height:20px;display:grid;place-items:center;background:var(--green-bg);border-radius:50%;flex-shrink:0}
+
+/* ═══════════════════════════════
+   MODULES
+   ═══════════════════════════════ */
+.mods{background:var(--cream);padding:88px 0;text-align:center}
+.mod-list{max-width:580px;margin:36px auto 0}
+.mod{display:flex;align-items:flex-start;gap:18px;padding:20px;margin-bottom:10px;background:var(--white);border-radius:14px;border:1px solid rgba(92,61,46,.04);text-align:left;transition:transform .4s var(--ease),box-shadow .4s}
+.mod:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(92,61,46,.06)}
+.mod-n{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,var(--gold),var(--gold-lt));display:grid;place-items:center;font:700 14px/1 var(--f-body);color:var(--white);box-shadow:0 4px 10px rgba(212,167,106,.25)}
+.mod h4{font-family:var(--f-body);font-size:15px;font-weight:700;color:var(--choc);margin-bottom:3px}
+.mod p{font-size:13px;color:var(--muted);margin:0;line-height:1.5}
+.mod-note{text-align:center;margin-top:20px;font-size:13px;color:var(--muted-lt);font-style:italic}
+
+/* ═══════════════════════════════
+   FOR WHO
+   ═══════════════════════════════ */
+.fw{background:var(--white);padding:80px 0;text-align:center}
+.fw-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:560px;margin:36px auto 0}
+@media(max-width:480px){.fw-grid{grid-template-columns:1fr}}
+.fw-col{text-align:left}
+.fw-col h3{font-family:var(--f-body);font-size:15px;font-weight:700;margin-bottom:14px}
+.fw-col li{padding:8px 0;font-size:14px;display:flex;align-items:flex-start;gap:10px;line-height:1.5;color:var(--muted)}
+.fw-y li::before{content:'✓';font-size:11px;font-weight:700;color:var(--green);width:22px;height:22px;display:grid;place-items:center;background:var(--green-bg);border-radius:50%;flex-shrink:0}
+.fw-n li::before{content:'✕';font-size:11px;font-weight:700;color:var(--coral);width:22px;height:22px;display:grid;place-items:center;background:var(--red-bg);border-radius:50%;flex-shrink:0}
+
+/* ═══════════════════════════════
+   SOCIAL PROOF
+   ═══════════════════════════════ */
+.proof{background:var(--choc-dk);color:var(--white);padding:96px 0;
+  background-image:radial-gradient(ellipse at 30% 15%,rgba(212,167,106,.06),transparent 50%)}
+.proof::after{content:'\201C';position:absolute;top:20px;right:5%;font-family:var(--f-head);font-size:clamp(180px,28vw,360px);color:rgba(212,167,106,.03);line-height:1;pointer-events:none}
+.proof .lbl{color:var(--gold)}.proof .lbl::before{background:linear-gradient(90deg,var(--gold),transparent)}
+.proof h2{color:var(--white)}
+.proof .w{position:relative;z-index:1}
+.tg{display:grid;gap:14px;max-width:560px;margin:36px auto 0}
+.tc{padding:26px;border-radius:18px;background:rgba(255,255,255,.04);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.06);transition:transform .35s var(--ease)}
+.tc:hover{transform:translateY(-3px)}
+.tc-stars{color:var(--gold);font-size:13px;letter-spacing:3px;margin-bottom:10px}
+.tc blockquote{font-family:var(--f-head);font-size:17px;font-style:italic;color:rgba(255,255,255,.85);line-height:1.6;margin-bottom:14px}
+.tc cite{font-style:normal;font-size:12px;color:var(--gold-lt);font-weight:500}
+
+/* ═══════════════════════════════
+   BONUS
+   ═══════════════════════════════ */
+.bonus{padding:88px 0;background:linear-gradient(178deg,var(--cream-w),var(--cream))}
+.bonus-g{display:grid;gap:12px;max-width:500px;margin:36px auto 0}
+.bc{display:flex;gap:16px;align-items:flex-start;padding:22px;background:var(--white);border-radius:16px;border:1px solid rgba(212,167,106,.1);transition:transform .35s var(--ease),box-shadow .35s}
+.bc:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(92,61,46,.06)}
+.bc-ico{width:46px;height:46px;border-radius:13px;flex-shrink:0;background:var(--gold-pale);display:grid;place-items:center;font-size:22px}
+.bc h4{font-family:var(--f-body);font-size:15px;font-weight:700;color:var(--choc);margin-bottom:3px}
+.bc p{font-size:13px;color:var(--muted);margin-bottom:6px;line-height:1.5}
+.bc-tag{font-size:12px;font-weight:700}.bc-tag .old{text-decoration:line-through;color:var(--muted-lt);margin-right:6px}.bc-tag .free{color:var(--green);background:var(--green-bg);padding:2px 10px;border-radius:20px}
+
+/* ═══════════════════════════════
+   OFFER
+   ═══════════════════════════════ */
+.offer{padding:88px 0;background:var(--white);text-align:center}
+.offer-box{max-width:480px;margin:36px auto 0;background:linear-gradient(168deg,var(--cream-w),var(--cream));border-radius:24px;padding:36px 28px;border:2px solid rgba(212,167,106,.18);position:relative;overflow:hidden;box-shadow:0 20px 56px rgba(92,61,46,.07)}
+.offer-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--coral),var(--gold),var(--coral-lt),var(--gold));background-size:200% 100%;animation:gslide 4s linear infinite}
+@keyframes gslide{to{background-position:200% 0}}
+.offer-badge{display:inline-flex;padding:6px 16px;border-radius:20px;background:var(--gold);color:var(--white);font:700 10px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px;position:relative;z-index:1}
+.offer-stack{text-align:left;margin-bottom:20px;position:relative;z-index:1}
+.offer-stack li{padding:10px 0;font-size:14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(92,61,46,.05);color:var(--dk)}
+.offer-stack li:last-child{border-bottom:2px solid var(--gold);font-weight:700;color:var(--choc);padding-bottom:14px}
+.offer-stack .v{font-weight:600;color:var(--choc);white-space:nowrap}
+.price-b{text-align:center;margin:24px 0;position:relative;z-index:1}
+.price-old{font-size:18px;color:var(--muted-lt);text-decoration:line-through;font-weight:500}
+.price-lbl{font-size:12px;color:var(--coral);font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin:6px 0 2px}
+.price-val{font-family:var(--f-head);font-size:clamp(48px,10vw,60px);font-weight:800;color:var(--choc);line-height:1}
+.price-val small{font-size:.4em;font-weight:700;margin-left:2px}
+.pay-m{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:16px;position:relative;z-index:1}
+.pay-m span{font-size:11px;color:var(--muted);background:var(--white);padding:5px 12px;border-radius:20px;display:flex;align-items:center;gap:4px}
+
+/* ═══════════════════════════════
+   GUARANTEE
+   ═══════════════════════════════ */
+.guar{padding:64px 0;background:var(--cream)}
+.guar-box{max-width:460px;margin:0 auto;text-align:center;background:var(--white);border-radius:18px;padding:28px 24px;border:2px solid var(--green-bg);display:flex;flex-direction:column;align-items:center;gap:12px}
+.guar-ico{width:56px;height:56px;background:var(--green-bg);border-radius:50%;display:grid;place-items:center;font-size:28px}
+.guar-box h3{color:var(--green);font-size:20px}
+.guar-box p{font-size:14px;color:var(--muted);max-width:360px;margin:0}
+
+/* ═══════════════════════════════
+   FAQ
+   ═══════════════════════════════ */
+.faq{padding:80px 0;background:var(--white);text-align:center}
+.faq-list{max-width:560px;margin:36px auto 0;text-align:left}
+.faq-i{border-bottom:1px solid rgba(92,61,46,.06)}
+.faq-q{width:100%;padding:18px 0;text-align:left;font:600 15px/1.4 var(--f-body);color:var(--choc);display:flex;justify-content:space-between;align-items:center;gap:14px}
+.faq-q .p{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:var(--cream);display:grid;place-items:center;font-size:18px;color:var(--coral);font-weight:300;transition:all .35s var(--ease)}
+.faq-i.open .faq-q .p{transform:rotate(45deg);background:var(--coral);color:var(--white)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .5s var(--ease),padding .3s}
+.faq-i.open .faq-a{max-height:260px;padding-bottom:18px}
+.faq-a p{font-size:14px;line-height:1.7;color:var(--muted);margin:0}
+
+/* ═══════════════════════════════
+   FINAL CTA
+   ═══════════════════════════════ */
+.final{padding:88px 0;text-align:center;background:linear-gradient(145deg,var(--coral),var(--coral-dk) 40%,var(--gold));color:var(--white);overflow:hidden}
+.final::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 35%,rgba(255,255,255,.07),transparent 50%)}
+.final .w{position:relative;z-index:1}
+.final h2{color:var(--white);margin-bottom:24px}
+.final-recap{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-bottom:32px}
+.final-recap span{font-size:14px;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:7px}
+.final .price-val{color:var(--white);margin-bottom:6px;text-shadow:0 2px 16px rgba(0,0,0,.12)}
+.final .price-lbl{color:rgba(255,255,255,.6);margin-bottom:24px}
+.final-urg{font-size:13px;color:rgba(255,255,255,.45);font-style:italic;margin-top:20px}
+
+/* ═══════════════════════════════
+   FOOTER
+   ═══════════════════════════════ */
+footer{background:var(--choc-rich);color:rgba(255,255,255,.35);text-align:center;padding:24px 0;font-size:12px;border-top:1px solid rgba(255,255,255,.04)}
+footer a{color:var(--gold-lt)}footer p{margin-bottom:3px}
+
+/* ═══════════════════════════════
+   STICKY + WHATSAPP
+   ═══════════════════════════════ */
+.sticky{position:fixed;bottom:0;left:0;right:0;z-index:5000;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-top:1px solid rgba(92,61,46,.06);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;transform:translateY(100%);transition:transform .5s var(--ease);box-shadow:0 -4px 24px rgba(0,0,0,.06)}
+.sticky.show{transform:translateY(0)}
+.sticky-pr{font-family:var(--f-head);font-size:20px;font-weight:700;color:var(--choc);line-height:1.1}
+.sticky-pr small{display:block;font-family:var(--f-body);font-size:10px;font-weight:600;color:var(--coral);text-transform:uppercase;letter-spacing:.04em}
+.sticky .btn{padding:13px 24px;font-size:13px;white-space:nowrap}
+@media(min-width:768px){.sticky{display:none}}
+.wpp{position:fixed;bottom:76px;right:16px;z-index:4999;width:52px;height:52px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 4px 16px rgba(37,211,102,.35);transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.wpp:hover{transform:scale(1.1)}
+.wpp svg{width:28px;height:28px;fill:var(--white)}
+@media(min-width:768px){.wpp{bottom:28px;right:28px}}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO — Headline + CTA first. No photo. ══ -->
+<section class="hero">
+<div class="w">
+  <div class="hero-tag rv">🍰 Formação Online</div>
+  <h1 class="rv rv-d1">Aprende a Fazer e Vender <em>Bolos no Pote</em> e Começa a Ganhar Dinheiro Esta Semana</h1>
+  <p class="hero-sub rv rv-d2">O método completo que já transformou dezenas de mulheres em confeiteiras de sucesso — mesmo que nunca tenhas feito um bolo na vida.</p>
+  <a href="#oferta" class="btn btn--lg btn--pulse rv rv-d3">QUERO APRENDER AGORA</a>
+  <p class="hero-price rv rv-d3"><span class="old">25.000 Kz</span> Apenas 9.900 Kz</p>
+  <div class="hero-proof rv rv-d4">
+    <span>+5 anos de experiência</span>
+    <span>Dezenas de alunas</span>
+    <span>Acesso imediato</span>
+  </div>
+  <div class="scroll-hint rv rv-d4">↓ Descobre mais</div>
+</div>
+</section>
+
+<!-- ══ WAVE ══ -->
+<svg style="display:block;margin-top:-1px" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none"><path d="M0 48V24C360 52 720 52 1080 24S1380 6 1440 0v48H0Z" fill="#FFF"/></svg>
+
+<!-- ══ PAIN ══ -->
+<section class="pain">
+<div class="w">
+  <span class="lbl rv">Identificação</span>
+  <h2 class="rv">Já te sentiste assim?</h2>
+  <div class="pain-list">
+    <div class="pain-item rv"><span class="ic">😔</span>Queres ganhar o teu próprio dinheiro, mas não sabes por onde começar</div>
+    <div class="pain-item rv rv-d1"><span class="ic">😔</span>Vês outras mulheres a vender doces e a ganhar bem, mas achas que não tens jeito</div>
+    <div class="pain-item rv rv-d2"><span class="ic">😔</span>Já pensaste em empreender, mas tens medo de investir e não dar certo</div>
+    <div class="pain-item rv rv-d3"><span class="ic">😔</span>Trabalhas o dia inteiro e no final do mês o dinheiro não chega</div>
+    <div class="pain-item rv rv-d4"><span class="ic">😔</span>Sentes que tens talento mas falta-te orientação profissional</div>
+  </div>
+  <p class="pain-end rv">Se te identificaste com pelo menos uma… este curso foi feito para ti.</p>
+</div>
+</section>
+
+<!-- ══ WAVE ══ -->
+<svg style="display:block;margin-top:-1px" viewBox="0 0 1440 40" fill="none" preserveAspectRatio="none"><path d="M0 0v20c480 28 960 28 1440 0v20H0V0Z" fill="#FFF"/><path d="M0 40v-20c480 28 960 28 1440 0v20H0Z" fill="#FFF5EE"/></svg>
+
+<!-- ══ AUTHORITY — photo as large background ══ -->
+<section class="auth">
+  <div class="auth-img-wrap">
+    <img src="PHOTO-2025-04-16-11-51-39.jpg" alt="Gertrudes Umbar com os seus bolos" class="auth-bg" loading="lazy">
+  </div>
+  <div class="auth-content">
+    <div class="auth-text">
+      <span class="lbl rv">A minha história</span>
+      <h2 class="rv">Olá, eu sou a Gertrudes Umbar</h2>
+      <p class="rv">Sou confeiteira há mais de 5 anos e fundadora da <strong>Carinho Doce Angola</strong>. Comecei a fazer bolos em casa, a vender para vizinhos — no início nem cobria os custos dos ingredientes.</p>
+      <p class="rv">Mas não desisti. Fui aprendendo, praticando, errando e acertando. Já formei dezenas de alunas presencialmente e agora quero que mais mulheres angolanas transformem a confeitaria num negócio lucrativo.</p>
+      <div class="auth-quote rv">"Transformei o meu dom num negócio e agora quero ensinar-te a fazer o mesmo."</div>
+      <div class="auth-stats rv">
+        <div class="auth-stat">⏱️ +5 anos</div>
+        <div class="auth-stat">👩🏾‍🎓 Dezenas de alunas</div>
+        <div class="auth-stat">🏪 Carinho Doce Angola</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WAVE ══ -->
+<svg style="display:block;margin-top:-1px" viewBox="0 0 1440 40" fill="none" preserveAspectRatio="none"><path d="M0 40V20C720 48 1440 0 1440 0v40H0Z" fill="#FFF5EE"/><path d="M0 40V20C720 48 1440 0 1440 0v40H0Z" fill="#FFF"/></svg>
+
+<!-- ══ TRANSFORMATION ══ -->
+<section class="tf">
+<div class="w">
+  <span class="lbl rv" style="justify-content:center">O que muda</span>
+  <h2 class="rv">A Transformação Que Te Espera</h2>
+  <div class="tf-grid">
+    <div class="tf-col tf-b rv"><h3>😕 Antes</h3><ul><li>Sem formação técnica</li><li>Preços ao acaso</li><li>Poucas vendas</li><li>Medo de começar</li><li>Depende de outros</li></ul></div>
+    <div class="tf-col tf-a rv rv-d1"><h3>🌟 Depois</h3><ul><li>Técnicas profissionais</li><li>Precificação correcta</li><li>Clientes constantes</li><li>Negócio próprio</li><li>Independência financeira</li></ul></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ WAVE ══ -->
+<svg style="display:block;margin-top:-1px" viewBox="0 0 1440 40" fill="none" preserveAspectRatio="none"><path d="M0 0v20c480 28 960 28 1440 0v20H0V0Z" fill="#FFF"/><path d="M0 40v-20c480 28 960 28 1440 0v20H0Z" fill="#FFF5EE"/></svg>
+
+<!-- ══ MODULES ══ -->
+<section class="mods">
+<div class="w">
+  <span class="lbl rv" style="justify-content:center">O curso</span>
+  <h2 class="rv">O Que Vais Aprender</h2>
+  <div class="mod-list">
+    <div class="mod rv"><div class="mod-n">01</div><div><h4>Fundamentos da Confeitaria</h4><p>Ingredientes, utensílios e técnicas que toda confeiteira precisa dominar.</p></div></div>
+    <div class="mod rv rv-d1"><div class="mod-n">02</div><div><h4>Receitas de Bolos no Pote</h4><p>Passo a passo das 5 receitas mais vendidas — chocolate, morango, maracujá, doce de leite, red velvet.</p></div></div>
+    <div class="mod rv rv-d2"><div class="mod-n">03</div><div><h4>Embalagem e Apresentação</h4><p>Como embalar e apresentar de forma profissional que faz o cliente comprar só de olhar.</p></div></div>
+    <div class="mod rv rv-d3"><div class="mod-n">04</div><div><h4>Precificação e Gestão</h4><p>Calcular custos e definir preços que te dão lucro real — nunca mais trabalhar de graça.</p></div></div>
+    <div class="mod rv rv-d4"><div class="mod-n">05</div><div><h4>Como Vender e Conquistar Clientes</h4><p>Estratégias para conseguir os primeiros 10 clientes usando apenas o WhatsApp.</p></div></div>
+  </div>
+  <p class="mod-note rv">📱 Aulas gravadas em vídeo — assiste quando e onde quiseres, no teu ritmo</p>
+  <div style="text-align:center;margin-top:28px" class="rv"><a href="#oferta" class="btn">QUERO APRENDER TUDO ISTO</a></div>
+</div>
+</section>
+
+<!-- ══ WAVE ══ -->
+<svg style="display:block;margin-top:-1px" viewBox="0 0 1440 40" fill="none" preserveAspectRatio="none"><path d="M0 40V20C720 48 1440 0 1440 0v40H0Z" fill="#FFF5EE"/><path d="M0 40V20C720 48 1440 0 1440 0v40H0Z" fill="#FFF"/></svg>
+
+<!-- ══ FOR WHO ══ -->
+<section class="fw">
+<div class="w">
+  <span class="lbl rv" style="justify-content:center">Será para ti?</span>
+  <h2 class="rv">Para Quem É Este Curso</h2>
+  <div class="fw-grid">
+    <div class="fw-col rv"><h3>✅ É para ti se:</h3><ul class="fw-y"><li>Queres começar um negócio com pouco investimento</li><li>Gostas de cozinhar, mesmo que sejas iniciante</li><li>Procuras uma fonte de renda extra</li><li>Queres ser independente financeiramente</li><li>Estás disposta a aprender e praticar</li></ul></div>
+    <div class="fw-col rv rv-d1"><h3>❌ NÃO é para ti se:</h3><ul class="fw-n"><li>Procuras dinheiro fácil sem esforço</li><li>Não estás disposta a praticar</li><li>Achas que vais ficar rica da noite para o dia</li><li>Não tens paciência para aprender</li></ul></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ WAVE ══ -->
+<svg style="display:block;margin-top:-1px" viewBox="0 0 1440 56" fill="none" preserveAspectRatio="none"><path d="M0 0C240 48 480 56 720 40S1200 8 1440 40V56H0V0Z" fill="#FFF"/><path d="M0 56C240 28 480 56 720 40S1200 8 1440 40V56H0Z" fill="#3A2218"/></svg>
+
+<!-- ══ SOCIAL PROOF ══ -->
+<section class="proof">
+<div class="w">
+  <span class="lbl rv">Resultados reais</span>
+  <h2 class="rv">O Que Dizem as Alunas</h2>
+  <div class="tg">
+    <div class="tc rv"><div class="tc-stars">★★★★★</div><blockquote>"A Gertrudes não ensina só a fazer bolos. Ela ensina-nos a ter visão de negócio. Em duas semanas já tinha recuperado o investimento."</blockquote><cite>— Aluna da Formação Presencial, Luanda</cite></div>
+    <div class="tc rv rv-d1"><div class="tc-stars">★★★★★</div><blockquote>"Nunca tinha feito confeitaria na vida. Hoje faço bolos no pote que esgotam no mesmo dia. As minhas amigas não acreditam!"</blockquote><cite>— Aluna da Formação Presencial</cite></div>
+    <div class="tc rv rv-d2"><div class="tc-stars">★★★★★</div><blockquote>"O módulo de precificação mudou o meu negócio. Vendia barato demais e nem sabia. A Gertrudes abriu os meus olhos."</blockquote><cite>— Aluna da Formação Presencial</cite></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ WAVE ══ -->
+<svg style="display:block;margin-top:-1px" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none"><path d="M0 0C360 48 720 48 1080 24S1380 6 1440 0v48H0V0Z" fill="#3A2218"/><path d="M0 48C360 20 720 48 1080 24S1380 6 1440 0v48H0Z" fill="#FFF0E5"/></svg>
+
+<!-- ══ BONUS ══ -->
+<section class="bonus">
+<div class="w" style="text-align:center">
+  <span class="lbl rv" style="justify-content:center">Incluído grátis</span>
+  <h2 class="rv">Bónus Exclusivos Para Ti</h2>
+  <div class="bonus-g">
+    <div class="bc rv"><div class="bc-ico">📊</div><div><h4>Planilha de Precificação Pronta</h4><p>Template pronto para calcular custo e preço de venda de cada bolo no pote.</p><div class="bc-tag"><span class="old">5.000 Kz</span><span class="free">GRÁTIS</span></div></div></div>
+    <div class="bc rv rv-d1"><div class="bc-ico">💬</div><div><h4>Grupo VIP no WhatsApp</h4><p>Grupo exclusivo para tirares dúvidas e receberes suporte durante 30 dias.</p><div class="bc-tag"><span class="old">10.000 Kz</span><span class="free">GRÁTIS</span></div></div></div>
+    <div class="bc rv rv-d2"><div class="bc-ico">🍫</div><div><h4>3 Receitas Secretas Extra</h4><p>Três sabores exclusivos — os mais pedidos pelas clientes da Carinho Doce Angola.</p><div class="bc-tag"><span class="old">5.000 Kz</span><span class="free">GRÁTIS</span></div></div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ WAVE ══ -->
+<svg style="display:block;margin-top:-1px" viewBox="0 0 1440 40" fill="none" preserveAspectRatio="none"><path d="M0 40V12C720 48 1440 12 1440 12v28H0Z" fill="#FFF0E5"/><path d="M0 40V12C720 48 1440 12 1440 12v28H0Z" fill="#FFF"/></svg>
+
+<!-- ══ OFFER ══ -->
+<section class="offer" id="oferta">
+<div class="w">
+  <span class="lbl rv" style="justify-content:center">Oferta especial</span>
+  <h2 class="rv">Tudo Isto Por Um Preço Especial</h2>
+  <div class="offer-box rv">
+    <div class="offer-badge">Oferta de Lançamento</div>
+    <ul class="offer-stack">
+      <li>📹 Curso Completo (5 módulos)<span class="v">15.000 Kz</span></li>
+      <li>📊 Planilha de Precificação<span class="v">5.000 Kz</span></li>
+      <li>💬 Grupo VIP WhatsApp (30 dias)<span class="v">10.000 Kz</span></li>
+      <li>🍫 3 Receitas Secretas Extra<span class="v">5.000 Kz</span></li>
+      <li>Valor total<span class="v">35.000 Kz</span></li>
+    </ul>
+    <div class="price-b">
+      <div class="price-old">De 25.000 Kz</div>
+      <div class="price-lbl">Preço de lançamento</div>
+      <div class="price-val">9.900<small>Kz</small></div>
+    </div>
+    <a href="https://wa.me/244927966690?text=Olá! Quero inscrever-me no curso Bolos no Pote" class="btn btn--lg btn--pulse">QUERO COMEÇAR AGORA →</a>
+    <div class="pay-m">
+      <span>📱 Multicaixa Express</span>
+      <span>🏦 Transferência</span>
+      <span>🔒 Seguro</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══ GUARANTEE ══ -->
+<section class="guar">
+<div class="w">
+  <div class="guar-box rv">
+    <div class="guar-ico">🛡️</div>
+    <h3>Garantia Total de 7 Dias</h3>
+    <p>Se em 7 dias achares que o curso não é para ti, devolvemos o teu dinheiro. Sem perguntas, sem complicações. O risco é todo nosso.</p>
+  </div>
+</div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="faq">
+<div class="w">
+  <span class="lbl rv" style="justify-content:center">Dúvidas?</span>
+  <h2 class="rv">Perguntas Frequentes</h2>
+  <div class="faq-list">
+    <div class="faq-i rv"><button class="faq-q">Preciso de experiência em confeitaria?<span class="p">+</span></button><div class="faq-a"><p>Não! O curso foi feito para iniciantes. Ensino tudo do zero, passo a passo.</p></div></div>
+    <div class="faq-i rv"><button class="faq-q">Preciso de equipamento profissional?<span class="p">+</span></button><div class="faq-a"><p>Não. Cozinha básica, forno normal, e utensílios simples que já tens em casa.</p></div></div>
+    <div class="faq-i rv"><button class="faq-q">Como recebo o acesso ao curso?<span class="p">+</span></button><div class="faq-a"><p>Após o pagamento, recebes o acesso via WhatsApp com todos os links. Em menos de 30 minutos.</p></div></div>
+    <div class="faq-i rv"><button class="faq-q">Posso assistir no telemóvel?<span class="p">+</span></button><div class="faq-a"><p>Sim! 100% optimizado para telemóvel. Assiste onde e quando quiseres.</p></div></div>
+    <div class="faq-i rv"><button class="faq-q">As aulas ficam disponíveis por quanto tempo?<span class="p">+</span></button><div class="faq-a"><p>Acesso vitalício. O curso é teu para sempre.</p></div></div>
+    <div class="faq-i rv"><button class="faq-q">O pagamento é seguro?<span class="p">+</span></button><div class="faq-a"><p>Sim. Multicaixa Express e transferência bancária. Tudo seguro. E tens 7 dias de garantia.</p></div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ WAVE ══ -->
+<svg style="display:block;margin-top:-1px" viewBox="0 0 1440 48" fill="none" preserveAspectRatio="none"><path d="M0 48V24C360 0 720 0 1080 24S1380 42 1440 48H0Z" fill="#FFF"/><path d="M0 48H1440V24C1200 48 960 48 720 24C480 0 240 0 0 24V48Z" fill="url(#g1)"/><defs><linearGradient id="g1" x1="0" y1="0" x2="1440" y2="0"><stop offset="0" stop-color="#E8857A"/><stop offset="1" stop-color="#D4A76A"/></linearGradient></defs></svg>
+
+<!-- ══ FINAL CTA ══ -->
+<section class="final">
+<div class="w">
+  <h2 class="rv">Não Deixes Para Amanhã o Negócio Que Podes Começar Hoje</h2>
+  <div class="final-recap rv">
+    <span>🍰 Curso completo</span><span>📱 No telemóvel</span><span>💰 Vende esta semana</span><span>🎁 3 bónus grátis</span><span>🔒 Garantia 7 dias</span>
+  </div>
+  <div class="price-val rv">9.900<small>Kz</small></div>
+  <p class="price-lbl rv" style="color:rgba(255,255,255,.6)">Preço de lançamento por tempo limitado</p>
+  <a href="https://wa.me/244927966690?text=Olá! Quero inscrever-me no curso Bolos no Pote" class="btn btn--wh btn--lg rv">GARANTIR A MINHA VAGA →</a>
+  <p class="final-urg rv">Enquanto hesitas, outras mulheres já estão a aprender, a fazer e a vender.</p>
+</div>
+</section>
+
+<footer>
+<div class="w">
+  <p>Gertrudes Umbar · Carinho Doce Angola</p>
+  <p>📲 <a href="https://wa.me/244927966690">927 966 690</a> · <a href="https://instagram.com/ge_umbar" target="_blank">@ge_umbar</a> · <a href="https://instagram.com/carinho_doce_angola" target="_blank">@carinho_doce_angola</a></p>
+  <p style="margin-top:8px;opacity:.5">© 2026 — Todos os direitos reservados</p>
+</div>
+</footer>
+
+<!-- STICKY -->
+<div class="sticky" id="stickyBar">
+  <div class="sticky-pr"><small>Lançamento</small>9.900 Kz</div>
+  <a href="https://wa.me/244927966690?text=Olá! Quero inscrever-me no curso Bolos no Pote" class="btn">INSCREVER-ME →</a>
+</div>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/244927966690?text=Olá! Tenho uma dúvida sobre o curso Bolos no Pote" class="wpp" target="_blank" rel="noopener" aria-label="WhatsApp">
+<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// Reveal
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')})},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+// Sticky
+const bar=document.getElementById('stickyBar'),hero=document.querySelector('.hero');
+new IntersectionObserver(e=>{e.forEach(x=>bar.classList.toggle('show',!x.isIntersecting))},{threshold:0}).observe(hero);
+
+// FAQ
+document.querySelectorAll('.faq-q').forEach(b=>{b.addEventListener('click',()=>{
+  const i=b.parentElement,was=i.classList.contains('open');
+  document.querySelectorAll('.faq-i.open').forEach(x=>x.classList.remove('open'));
+  if(!was)i.classList.add('open');
+})});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+</script>
+</body>
+</html>
